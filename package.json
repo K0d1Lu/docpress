@@ -1,0 +1,16 @@
+{
+  "name": "wedia-doc",
+  "version": "0.0.1",
+  "description": "Generate documentation for Wedia projects",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wedia",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^2.0.0-beta.26"
+  }
+}
