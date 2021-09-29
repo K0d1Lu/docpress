@@ -4,13 +4,20 @@
   "description": "Generate documentation for Wedia projects",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pre-commit": "lint-staged"
   },
   "author": "Wedia",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
     "vuepress": "^2.0.0-beta.26"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint"
   }
 }
