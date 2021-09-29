@@ -1,6 +1,5 @@
 const { path } = require("@vuepress/utils")
 const fs = require('fs-extra')
-// const { locales } = require("./theme/locales")
 const deepmerge = require('deepmerge')
 
 const customConfig = fs.ensureFileSync('../docgen/config.js') ? require('../docgen/config.js') : {}
@@ -14,7 +13,6 @@ const baseConfig = {
   },
   description: "Configuration tool for Wedia DAM",
   title: 'Default title',
-  // theme: path.resolve(__dirname, "./theme"),
 
   locales: {
     "/": {
@@ -36,10 +34,10 @@ const baseConfig = {
       { text: "Releases notes", link: "/releases/" },
       { text: "Guide", link: "/guide/" },
       { text: "Portal", link: "/portal.html" },
-      { text: "Docgen", link: "/docgen/" },
+      { text: "Docgen", link: "/docgen/docs" },
+      { text: "Mise en production", link: "/docgen/docs/MEP.md" },
     ],
     lastUpdated: "Last Updated",
-    //locales
   },
 
   plugins: [
