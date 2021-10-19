@@ -2,8 +2,7 @@ const { path } = require("@vuepress/utils")
 const fs = require('fs-extra')
 const deepmerge = require('deepmerge')
 
-const customConfig = fs.ensureFileSync('../docgen/config.js') ? require('../docgen/config.js') : {}
-
+const customConfig = fs.existsSync(path.join(__dirname, '../docgen/config.js')) ? require(path.join(__dirname, '../docgen/config.js')) : {}
 const isProd = process.env.NODE_ENV === "production"
 
 const baseConfig = {
@@ -29,14 +28,6 @@ const baseConfig = {
   themeConfig: {
     darkMode: false,
     logo: "https://vuejs.org/images/logo.png",
-    navbar: [
-      { text: "Styles", link: "/style/" },
-      { text: "Releases notes", link: "/releases/" },
-      { text: "Guide", link: "/guide/" },
-      { text: "Portal", link: "/portal.html" },
-      { text: "Docgen", link: "/docgen/docs" },
-      { text: "Mise en production", link: "/docgen/docs/MEP.md" },
-    ],
     lastUpdated: "Last Updated",
   },
 
