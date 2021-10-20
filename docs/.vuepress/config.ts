@@ -16,12 +16,7 @@ const baseConfig = {
   locales: {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
-      description: "Configuration tool for Wedia DAM",
       title: 'English title',
-    },
-    "/fr/": {
-      lang: "fr-FR",
-      description: "Outil de configuration pour le DAM Wedia",
     }
   },
 
