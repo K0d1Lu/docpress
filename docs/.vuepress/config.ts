@@ -21,8 +21,7 @@ const baseConfig = {
   },
 
   themeConfig: {
-    darkMode: false,
-    logo: "https://vuejs.org/images/logo.png",
+    logo: "./images/wedia-logo-filled.png",
     lastUpdated: "Last Updated",
   },
 

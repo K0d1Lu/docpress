@@ -36,7 +36,7 @@ The default value for `DOC_TYPE` is `"all"` wich means all files are included.
 TODO / ideas :
 
 - creates configuration files with repositories and retrieve the good config via .env (ie : PROJECT=portal or PROJECT="portal, wedia-vue")
-- multi langue
+- ~~multi langue~~
 - allow to put files in others directory (useful for project s documentation)
 - programmatically creates TOC (with folders or files names)
 - default branch to master

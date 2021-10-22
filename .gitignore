@@ -1,7 +1,9 @@
 docs/.vuepress/dist/
 docs/docgen
+docs/README.md
 
 node_modules
 .temp
 .cache
 .env
+.DS_Store
