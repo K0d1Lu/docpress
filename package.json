@@ -2,21 +2,25 @@
   "name": "wedia-doc",
   "version": "0.0.1",
   "description": "Generate documentation for Wedia projects",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "vuepress dev docs --port 9001",
     "docs:dev:dist": "node ./scripts/importDocs.mjs && npm run docs:dev",
     "docs:build": "vuepress build docs",
+    "tauri": "tauri",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-commit": "lint-staged"
   },
   "author": "Wedia",
   "license": "ISC",
   "devDependencies": {
+    "@tauri-apps/cli": "^1.0.0-rc.11",
     "@vue/cli-service": "^4.5.13",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "babel-eslint": "^10.1.0",
+    "deepmerge": "^4.2.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.18.0",
@@ -30,6 +34,7 @@
     "vuepress-vite": "^2.0.0-beta.26"
   },
   "dependencies": {
+    "@tauri-apps/api": "^1.0.0-rc.5",
     "@vuepress/plugin-search": "^2.0.0-beta.26"
   },
   "lint-staged": {

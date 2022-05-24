@@ -1,14 +1,35 @@
-const { path } = require("@vuepress/utils")
-const fs = require('fs-extra')
-const deepmerge = require('deepmerge')
-
-const customConfig = fs.existsSync(path.join(__dirname, '../docgen/config.js')) ? require(path.join(__dirname, '../docgen/config.js')) : {}
+import { path } from '@vuepress/utils'
+import fs  from 'fs-extra'
+import deepmerge from 'deepmerge'
+//const docs = require(path.join(__dirname, '../../scripts/wedia-doc.js'))
+//import docs from '../../scripts/wedia-doc.js';
+//import docs from '../../scripts/wedia-doc.js';
+// const docs = import(path.join(__dirname, '../../scripts/wedia-doc.mjs'))
+//const docs = []
+//console.log('docs are ::: ', docs)
+// const subcustomConfig = fs.existsSync(path.join(__dirname, '../docgen/docs/wedia-vue/subconfig.js')) ? require(path.join(__dirname, '../docgen/docs/wedia-vue/subconfig.js')) : {}
 const isProd = process.env.NODE_ENV === "production"
 
+const docs = require(path.join(__dirname, '../../scripts/wedia-doc.js'))
+console.log('docs :::: ', docs)
+
 const baseConfig = {
-  bundler: isProd ? "@vuepress/webpack" : "@vuepress/vite",
+  bundler: "@vuepress/vite",
   bundlerConfig: {
     evergreen: !isProd,
+    build: {
+      target: "node14"
+    },
+    esbuild: {
+      build: {
+        target: "node14"
+      }
+    },
+    viteOptions: {
+      build: {
+        target: "node14"
+      },
+    }
   },
   description: "Configuration tool for Wedia DAM",
   title: 'Default title',
@@ -35,4 +56,24 @@ const baseConfig = {
   ]
 };
 
-module.exports = deepmerge(baseConfig, customConfig)
+  const customConfig = fs.existsSync(path.join(__dirname, '../docgen/config.js')) ? require(path.join(__dirname, '../docgen/config.js')) : {}
+  const configTomerge = [baseConfig, customConfig]
+
+  docs.forEach(doc => {
+    if (doc.name) {
+      const subcustomConfig = fs.existsSync(path.join(__dirname, `../docgen/${doc.name}/subconfig.js`)) ? require(path.join(__dirname, `../docgen/${doc.name}/subconfig.js`)) : {}
+      configTomerge.push(subcustomConfig);
+    }
+  });
+
+
+
+
+// const subcustomConfig = fs.existsSync(path.join(__dirname, '../docgen/docs/wedia-vue/subconfig.js')) ? require(path.join(__dirname, '../docgen/docs/wedia-vue/subconfig.js')) : {}
+
+
+//const merged = deepmerge(customConfig, subcustomConfig)
+
+// console.log(deepmerge(baseConfig, merged))
+
+module.exports = deepmerge.all(configTomerge)

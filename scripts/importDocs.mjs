@@ -7,6 +7,8 @@ import klaw from 'klaw' // eslint-disable-line
 
 import gitdd, { handleGitdError } from 'gitdd' // eslint-disable-line
 
+import docs from './wedia-doc.mjs.js'
+
 dotenv.config()
 const __dirname = dirname(fileURLToPath(import.meta.url)) // eslint-disable-line
 
@@ -80,13 +82,11 @@ async function deleteFiles() {
  * Get local files instead of distant files
  * @todo: handle multiple projects documentation
  */
-async function fetchLocalFiles() {
-  fs.remove(path.resolve(__dirname, '../docs/docgen'))
-
+async function fetchLocalFiles(project) {
   try {
     await fs.copy(
-      process.env.LOCAL_DIR,
-      path.resolve(__dirname, '../docs/docgen'),
+      project.directory,
+      path.resolve(__dirname, `../docs/docgen${!project.main ? `/${project.name}` : ''}`),
       { filter },
     )
   } catch (err) {
@@ -116,28 +116,35 @@ async function generateHomePage() {
  * Retrieve files to build documentation
  * @returns {void}
  */
-async function fetchFiles() {
-  await fs.remove(path.resolve(__dirname, '../docs/docgen'))
-
-  if (process.env.LOCAL_DIR) {
-    await fetchLocalFiles()
-    generateHomePage()
+async function fetchFiles(project) {
+  if (project.directory) {
+    await fetchLocalFiles(project)
+    if (project.main) {
+      generateHomePage()
+    }
     return
   }
 
   try {
-    await gitdd(process.env.GIT_REPO, {
+    await gitdd(project.repository, {
       dir: 'wedia-docgen',
       out: path.resolve(__dirname, '../docs/docgen'),
-      branch: process.env.GIT_BRANCH,
+      branch: project.branch,
     })
   } catch (err) {
     handleGitdError(err)
     return
   }
 
-  await generateHomePage()
+  if (project.main) {
+    await generateHomePage()
+  }
+
   deleteFiles()
 }
 
-fetchFiles()
+await fs.remove(path.resolve(__dirname, '../docs/docgen'))
+
+for (const doc of docs) {
+  await fetchFiles(doc)
+}
