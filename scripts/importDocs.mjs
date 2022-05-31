@@ -7,7 +7,7 @@ import klaw from 'klaw' // eslint-disable-line
 
 import gitdd, { handleGitdError } from 'gitdd' // eslint-disable-line
 
-import docs from './wedia-doc.mjs.js'
+import docs from './wedia-doc.js'
 
 dotenv.config()
 const __dirname = dirname(fileURLToPath(import.meta.url)) // eslint-disable-line
@@ -74,7 +74,7 @@ async function deleteFiles() {
     }
   })
 
-  klaw(path.resolve(__dirname, '../docs/docgen'))
+  klaw(path.resolve(__dirname, '../docs/docpress'))
     .pipe(deleteAction)
 }
 
@@ -86,7 +86,7 @@ async function fetchLocalFiles(project) {
   try {
     await fs.copy(
       project.directory,
-      path.resolve(__dirname, `../docs/docgen${!project.main ? `/${project.name}` : ''}`),
+      path.resolve(__dirname, `../docs/docpress${!project.main ? `/${project.name}` : ''}`),
       { filter },
     )
   } catch (err) {
@@ -104,7 +104,7 @@ async function generateHomePage() {
 
   try {
     await fs.move(
-      path.resolve(__dirname, '../docs/docgen/docs/README.md'),
+      path.resolve(__dirname, '../docs/docpress/README.md'),
       path.resolve(__dirname, '../docs/README.md'),
     )
   } catch (err) {
@@ -127,8 +127,8 @@ async function fetchFiles(project) {
 
   try {
     await gitdd(project.repository, {
-      dir: 'wedia-docgen',
-      out: path.resolve(__dirname, '../docs/docgen'),
+      dir: 'docpress',
+      out: path.resolve(__dirname, '../docs/docpress'),
       branch: project.branch,
     })
   } catch (err) {
@@ -143,7 +143,7 @@ async function fetchFiles(project) {
   deleteFiles()
 }
 
-await fs.remove(path.resolve(__dirname, '../docs/docgen'))
+await fs.remove(path.resolve(__dirname, '../docs/docpress'))
 
 for (const doc of docs) {
   await fetchFiles(doc)

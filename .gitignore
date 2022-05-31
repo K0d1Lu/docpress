@@ -1,5 +1,6 @@
 docs/.vuepress/dist/
-docs/docgen
+docs/.vuepress/public/html
+docs/docpress
 docs/README.md
 
 node_modules

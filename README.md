@@ -46,6 +46,9 @@ TODO / ideas :
 - integrates bootstrap and other things
 - integrates mermaid and show architecture diagram
 - allow to fetch different versions (with branches or tag on portal ?)
+- config to use components
+- give a hook to copy files in /public and use links in markdowns
+- give projects possibility to add thair favicon and images
 
 
 

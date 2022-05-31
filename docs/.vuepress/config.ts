@@ -52,16 +52,16 @@ const baseConfig = {
       {
         searchMaxSuggestions: 10
       }
-    ]
+    ],
   ]
 };
 
-  const customConfig = fs.existsSync(path.join(__dirname, '../docgen/config.js')) ? require(path.join(__dirname, '../docgen/config.js')) : {}
+  const customConfig = fs.existsSync(path.join(__dirname, '../docpress/config.js')) ? require(path.join(__dirname, '../docpress/config.js')) : {}
   const configTomerge = [baseConfig, customConfig]
 
   docs.forEach(doc => {
     if (doc.name) {
-      const subcustomConfig = fs.existsSync(path.join(__dirname, `../docgen/${doc.name}/subconfig.js`)) ? require(path.join(__dirname, `../docgen/${doc.name}/subconfig.js`)) : {}
+      const subcustomConfig = fs.existsSync(path.join(__dirname, `../docpress/${doc.name}/subconfig.js`)) ? require(path.join(__dirname, `../docpress/${doc.name}/subconfig.js`)) : {}
       configTomerge.push(subcustomConfig);
     }
   });
