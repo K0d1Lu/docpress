@@ -1,25 +1,14 @@
-# WEDIA DOCUMENTATION GENERATOR
+# DOCPRESS
 
-Creates documentations sites for any wedia repository easily. 
+Creates documentations sites for any repository easily. 
 
 ## How to use
 
-Edit your `.env` file with desired documentation, then execute `npm run docs:dev:dist`
-
-Example :
-
-```
-GIT_REPO="git@bitbucket.org:wediaproduct/portal.git"
-GIT_BRANCH=testing-documentation
-```
+Edit `script/docs.js` file with desired documentation, then execute `npm run import && npm run docs:dev`
 
 ### For developement (local testing)
 
-Edit your `.env` file with desired **local** documentation :
-
-```
-LOCAL_DIR=/full/path/to/procject/wedia-docgen
-```
+Edit your `script/docs.js` file with desired **local** documentation
 
 ### Generate particular documentation
 
@@ -49,9 +38,3 @@ TODO / ideas :
 - config to use components
 - give a hook to copy files in /public and use links in markdowns
 - give projects possibility to add thair favicon and images
-
-
-
-# Mixed documentations
-
-If you want to build a documentation from several sources (i.e portal + wedia-vue).

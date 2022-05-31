@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv' // eslint-disable-line
@@ -7,7 +9,7 @@ import klaw from 'klaw' // eslint-disable-line
 
 import gitdd, { handleGitdError } from 'gitdd' // eslint-disable-line
 
-import docs from './wedia-doc.js'
+import docs from './docs.js'
 
 dotenv.config()
 const __dirname = dirname(fileURLToPath(import.meta.url)) // eslint-disable-line

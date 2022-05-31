@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "husky install",
     "docs:dev": "vuepress dev docs --port 9001",
-    "docs:dev:dist": "node ./scripts/importDocs.mjs && npm run docs:dev",
+    "import": "node ./scripts/importDocs.mjs",
     "docs:build": "vuepress build docs",
     "tauri": "tauri",
     "test": "echo \"Error: no test specified\" && exit 1",
